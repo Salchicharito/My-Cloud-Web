@@ -1,6 +1,6 @@
-<%@ page import="org.gerdoc.service.AlumnoService" %>
-<%@ page import="org.gerdoc.service.impl.AlumnoServiceImpl" %>
-<%@ page import="org.gerdoc.model.Alumno" %>
+<%@ page import="org.gerdoc.service.ProfesorService" %>
+<%@ page import="org.gerdoc.service.impl.ProfesorServiceImpl" %>
+<%@ page import="org.gerdoc.model.Profesor" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!doctype html>
@@ -13,18 +13,18 @@
 </head>
 <body>
 <div class="container">
-    <h1>Proyecto funcionando</h1>
+    <h1>Detalle Profesor</h1>
     <%
-        String alumnoId = request.getParameter( "id" );
+        String profesorId = request.getParameter( "id" );
 
-        AlumnoService alumnoService = null;
+        ProfesorService profesorService = null;
         Long id = null;
-        Alumno alumno = null;
-        if( alumnoId != null )
+        Profesor profesor = null;
+        if( profesorId != null )
         {
-            id = Long.parseLong( alumnoId );
-            alumnoService = new AlumnoServiceImpl( );
-            alumno = alumnoService.findById( id );
+            id = Long.parseLong( profesorId );
+            profesorService = new ProfesorServiceImpl( );
+            profesor = profesorService.findById( id );
         }
     %>
     <table class="table">
@@ -34,28 +34,24 @@
         </tr>
         </thead>
         <%
-        if( alumno != null )
+        if( profesor != null )
         {
         %>
             <tbody>
                 <tr>
                     <td>Nombre</td>
-                    <td><%= alumno.getNombre( )%></td>
+                    <td><%= profesor.getNombre( )%></td>
                 </tr>
                 <tr>
-                    <td>Edad</td>
-                    <td><%= alumno.getEdad( )%></td>
-                    </tr>
-                    <tr>
-                        <td>Promedio</td>
-                        <td><%= alumno.getPromedio( )%></td>
-                    </tr>
+                    <td>Especialidad</td>
+                    <td><%= profesor.getEspecialidad( )%></td>
+                </tr>
             </tbody>
         <%
         }
         %>
     </table>
-    <a href="Alumnos.jsp" class="btn btn-secondary">
+    <a href="Profesores.jsp" class="btn btn-secondary">
         Regresar
     </a>
 </div>
