@@ -5,8 +5,8 @@ Servicios REST (Spring Boot) para los 5 catálogos de la base de datos `ESCUELA`
 ## Cómo correrlo
 
 1. En IntelliJ: clic derecho en `escuela-rest/pom.xml` → **Add as Maven Project**.
-2. Revisa usuario y contraseña de MySQL en `src/main/resources/application.properties`
-   (o define las variables de entorno `DB_USER` y `DB_PASSWORD`).
+2. Define las variables de entorno `DB_PASSWORD` (obligatoria) y `DB_USER`
+   (opcional, por defecto `root`) con las credenciales de MySQL.
 3. Ejecuta `EscuelaRestApplication`. Queda en `http://localhost:8081`.
 
 ## Endpoints
