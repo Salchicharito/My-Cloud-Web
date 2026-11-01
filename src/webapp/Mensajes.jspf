@@ -1,0 +1,24 @@
+<%-- Aviso que muestran las páginas de catálogo cuando un servlet regresa con ?error=... --%>
+<%
+    String errorOperacion = request.getParameter( "error" );
+    if( "delete".equals( errorOperacion ) )
+    {
+%>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        No se pudo borrar el registro porque otros registros dependen de él
+        (por ejemplo, materias asignadas a un profesor o inscripciones de alumnos).
+        Borra primero esas relaciones e inténtalo de nuevo.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+    </div>
+<%
+    }
+    else if( "save".equals( errorOperacion ) )
+    {
+%>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        No se pudo guardar el registro. Revisa los datos (por ejemplo, que la relación no esté duplicada).
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+    </div>
+<%
+    }
+%>

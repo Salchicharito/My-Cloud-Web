@@ -34,8 +34,8 @@ public class AlumnoMateriaServlet extends HttpServlet
         if ("delete".equals(accion))
         {
             Long id = Long.parseLong( req.getParameter("id" ) );
-            alumnoMateriaService.deleteById( id );
-            resp.sendRedirect("AlumnoMaterias.jsp" );
+            boolean borrado = alumnoMateriaService.deleteById( id );
+            resp.sendRedirect( borrado ? "AlumnoMaterias.jsp" : "AlumnoMaterias.jsp?error=delete" );
             return;
         }
         Long alumnoId = Long.parseLong( req.getParameter("alumnoId" ) );
@@ -50,15 +50,16 @@ public class AlumnoMateriaServlet extends HttpServlet
                 .materia(materia)
                 .calificacion(calificacion)
                 .build();
-        if( "update".equals(accion) )
+        boolean guardado;
+        if( "update".equals( accion ) )
         {
             alumnoMateria.setId( id );
-            alumnoMateriaService.update( alumnoMateria );
+            guardado = alumnoMateriaService.update( alumnoMateria );
         }
         else
         {
-            alumnoMateriaService.save( alumnoMateria );
+            guardado = alumnoMateriaService.save( alumnoMateria );
         }
-        resp.sendRedirect("AlumnoMaterias.jsp");
+        resp.sendRedirect( guardado ? "AlumnoMaterias.jsp" : "AlumnoMaterias.jsp?error=save" );
     }
 }

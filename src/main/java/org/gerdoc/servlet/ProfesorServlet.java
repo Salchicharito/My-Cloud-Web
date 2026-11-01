@@ -26,8 +26,8 @@ public class ProfesorServlet extends HttpServlet
         if ("delete".equals(accion))
         {
             Long id = Long.parseLong(req.getParameter("id"));
-            profesorService.deleteById(id);
-            resp.sendRedirect("Profesores.jsp");
+            boolean borrado = profesorService.deleteById( id );
+            resp.sendRedirect( borrado ? "Profesores.jsp" : "Profesores.jsp?error=delete" );
             return;
         }
         String nombre = req.getParameter("nombre" );
@@ -38,15 +38,16 @@ public class ProfesorServlet extends HttpServlet
                 .nombre( nombre )
                 .especialidad( especialidad )
                 .build();
-        if( "update".equals(accion) )
+        boolean guardado;
+        if( "update".equals( accion ) )
         {
             profesor.setId( id );
-            profesorService.update( profesor );
+            guardado = profesorService.update( profesor );
         }
         else
         {
-            profesorService.save( profesor );
+            guardado = profesorService.save( profesor );
         }
-        resp.sendRedirect("Profesores.jsp");
+        resp.sendRedirect( guardado ? "Profesores.jsp" : "Profesores.jsp?error=save" );
     }
 }

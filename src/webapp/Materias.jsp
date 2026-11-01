@@ -14,6 +14,7 @@
 <body>
 <div class="container">
     <h1>Materias</h1>
+    <%@ include file="Mensajes.jspf" %>
     <%
         MateriaService materiaService = new MateriaServiceImpl( );
         List<Materia> materias = materiaService.findAll( );
@@ -97,7 +98,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Cerrar
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" id="btnGuardar">
                         Guardar materia
                     </button>
                 </div>

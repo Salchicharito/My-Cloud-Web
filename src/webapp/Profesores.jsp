@@ -14,6 +14,7 @@
 <body>
 <div class="container">
     <h1>Profesores</h1>
+    <%@ include file="Mensajes.jspf" %>
     <%
         ProfesorService profesorService = new ProfesorServiceImpl( );
         List<Profesor> profesores = profesorService.findAll( );
@@ -101,7 +102,7 @@
                         Cerrar
                     </button>
 
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" id="btnGuardar">
                         Guardar profesor
                     </button>
                 </div>

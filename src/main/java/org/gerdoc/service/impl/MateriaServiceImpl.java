@@ -29,20 +29,20 @@ public class MateriaServiceImpl implements MateriaService
     }
 
     @Override
-    public void save(Materia materia)
+    public boolean save(Materia materia)
     {
-        materiaDao.save( materia );
+        return materiaDao.save( materia ) != null;
     }
 
     @Override
-    public void deleteById(Long id)
+    public boolean deleteById(Long id)
     {
-        materiaDao.deleteById( id );
+        return materiaDao.deleteById( id );
     }
 
     @Override
-    public void update(Materia materia)
+    public boolean update(Materia materia)
     {
-        materiaDao.update( materia );
+        return materiaDao.update( materia ) != null;
     }
 }

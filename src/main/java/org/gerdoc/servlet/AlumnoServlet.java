@@ -26,8 +26,8 @@ public class AlumnoServlet extends HttpServlet
         if ("delete".equals(accion))
         {
             Long id = Long.parseLong(req.getParameter("id"));
-            alumnoService.deleteById(id);
-            resp.sendRedirect("Alumnos.jsp");
+            boolean borrado = alumnoService.deleteById( id );
+            resp.sendRedirect( borrado ? "Alumnos.jsp" : "Alumnos.jsp?error=delete" );
             return;
         }
         String nombre = req.getParameter("nombre" );
@@ -40,15 +40,16 @@ public class AlumnoServlet extends HttpServlet
                 .edad( edad )
                 .promedio( promedio )
                 .build();
-        if( "update".equals(accion) )
+        boolean guardado;
+        if( "update".equals( accion ) )
         {
             alumno.setId( id );
-            alumnoService.update( alumno );
+            guardado = alumnoService.update( alumno );
         }
         else
         {
-            alumnoService.save( alumno );
+            guardado = alumnoService.save( alumno );
         }
-        resp.sendRedirect("Alumnos.jsp");
+        resp.sendRedirect( guardado ? "Alumnos.jsp" : "Alumnos.jsp?error=save" );
     }
 }

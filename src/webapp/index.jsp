@@ -8,6 +8,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.jsp">Escuela</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuCatalogos"
+                aria-controls="menuCatalogos" aria-expanded="false" aria-label="Mostrar menú">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menuCatalogos">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="Alumnos.jsp">Alumnos</a></li>
+                <li class="nav-item"><a class="nav-link" href="Materias.jsp">Materias</a></li>
+                <li class="nav-item"><a class="nav-link" href="Profesores.jsp">Profesores</a></li>
+                <li class="nav-item"><a class="nav-link" href="ProfesorMaterias.jsp">Profesor - Materia</a></li>
+                <li class="nav-item"><a class="nav-link" href="AlumnoMaterias.jsp">Alumno - Materia</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container">
     <h1 class="mt-4 mb-4">Sistema de Administración Escolar</h1>
     <p class="lead">Selecciona un catálogo para administrar:</p>

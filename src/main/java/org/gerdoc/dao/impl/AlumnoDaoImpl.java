@@ -54,30 +54,41 @@ public class AlumnoDaoImpl implements AlumnoDao
         catch (Exception e)
         {
             e.printStackTrace();
-            transaction.rollback( );
+            if( transaction != null && transaction.isActive( ) )
+            {
+                transaction.rollback( );
+            }
+            session.clear( );
             return null;
         }
     }
 
     @Override
-    public void deleteById(Long id)
+    public boolean deleteById(Long id)
     {
         Transaction transaction = null;
-        Alumno alumno = null;
         try
         {
-            alumno = findById( id );
-            if( alumno != null )
+            Alumno alumno = findById( id );
+            if( alumno == null )
             {
-                transaction = session.beginTransaction();
-                session.delete( alumno );
-                transaction.commit( );
+                return false;
             }
+            transaction = session.beginTransaction();
+            session.delete( alumno );
+            transaction.commit( );
+            return true;
         }
         catch (Exception e)
         {
+            // Falla si otro registro todavía lo referencia (llave foránea)
             e.printStackTrace();
-            transaction.rollback( );
+            if( transaction != null && transaction.isActive( ) )
+            {
+                transaction.rollback( );
+            }
+            session.clear( );
+            return false;
         }
     }
 
@@ -96,7 +107,11 @@ public class AlumnoDaoImpl implements AlumnoDao
         catch (Exception e)
         {
             e.printStackTrace();
-            transaction.rollback( );
+            if( transaction != null && transaction.isActive( ) )
+            {
+                transaction.rollback( );
+            }
+            session.clear( );
             return null;
         }
     }

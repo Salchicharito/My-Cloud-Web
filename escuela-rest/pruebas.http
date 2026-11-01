@@ -1,0 +1,124 @@
+### Demostración de los servicios REST (IntelliJ: botón ▶ junto a cada petición)
+### Antes: correr sql/Escuela.sql para empezar con los datos originales,
+### y arrancar EscuelaRestApplication (puerto 8081).
+### Después de cada cambio, verifica en MySQL con escuela-rest/verificar.sql
+
+@url = http://localhost:8081/api
+
+######################## ALUMNO ########################
+
+### Consultar todos
+GET {{url}}/alumnos
+
+### Consultar uno
+GET {{url}}/alumnos/1
+
+### Alta (regresa 201 con el ID nuevo: 4)
+POST {{url}}/alumnos
+Content-Type: application/json
+
+{ "nombre": "LUIS", "edad": 21, "promedio": 8.5 }
+
+### Cambio
+PUT {{url}}/alumnos/4
+Content-Type: application/json
+
+{ "nombre": "LUIS PEREZ", "edad": 22, "promedio": 9.0 }
+
+### Baja (204)
+DELETE {{url}}/alumnos/4
+
+### Baja NO permitida: ANA tiene materias inscritas (409 Conflict)
+DELETE {{url}}/alumnos/1
+
+######################## MATERIA ########################
+
+### Consultar todas
+GET {{url}}/materias
+
+### Alta (ID 6)
+POST {{url}}/materias
+Content-Type: application/json
+
+{ "nombre": "SISTEMAS OPERATIVOS", "creditos": 6 }
+
+### Cambio
+PUT {{url}}/materias/6
+Content-Type: application/json
+
+{ "nombre": "SISTEMAS OPERATIVOS", "creditos": 8 }
+
+### Baja
+DELETE {{url}}/materias/6
+
+### Baja NO permitida: tiene alumnos y profesores (409)
+DELETE {{url}}/materias/1
+
+######################## PROFESOR ########################
+
+### Consultar todos
+GET {{url}}/profesores
+
+### Alta (ID 5)
+POST {{url}}/profesores
+Content-Type: application/json
+
+{ "nombre": "LAURA DIAZ", "especialidad": "FISICA" }
+
+### Cambio
+PUT {{url}}/profesores/5
+Content-Type: application/json
+
+{ "nombre": "LAURA DIAZ", "especialidad": "QUIMICA" }
+
+### Baja
+DELETE {{url}}/profesores/5
+
+### Baja NO permitida: tiene materias asignadas (409)
+DELETE {{url}}/profesores/1
+
+######################## ALUMNO_MATERIA ########################
+
+### Consultar todas las inscripciones
+GET {{url}}/alumno-materias
+
+### Alta: CARLOS (2) en DESARROLLO WEB (5) -> ID 8
+POST {{url}}/alumno-materias
+Content-Type: application/json
+
+{ "alumno": { "id": 2 }, "materia": { "id": 5 }, "calificacion": 7.5 }
+
+### Cambio de calificación
+PUT {{url}}/alumno-materias/8
+Content-Type: application/json
+
+{ "alumno": { "id": 2 }, "materia": { "id": 5 }, "calificacion": 9.5 }
+
+### Baja
+DELETE {{url}}/alumno-materias/8
+
+### Alta NO permitida: ANA ya está inscrita en la materia 1 (409)
+POST {{url}}/alumno-materias
+Content-Type: application/json
+
+{ "alumno": { "id": 1 }, "materia": { "id": 1 }, "calificacion": 7 }
+
+######################## PROFESOR_MATERIA ########################
+
+### Consultar todas las asignaciones
+GET {{url}}/profesor-materias
+
+### Alta: MARIA LOPEZ (2) da DESARROLLO WEB (5) -> ID 6
+POST {{url}}/profesor-materias
+Content-Type: application/json
+
+{ "profesor": { "id": 2 }, "materia": { "id": 5 } }
+
+### Cambio: ahora da MATEMATICAS (3)
+PUT {{url}}/profesor-materias/6
+Content-Type: application/json
+
+{ "profesor": { "id": 2 }, "materia": { "id": 3 } }
+
+### Baja
+DELETE {{url}}/profesor-materias/6

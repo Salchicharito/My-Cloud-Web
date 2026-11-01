@@ -29,20 +29,20 @@ public class AlumnoServiceImpl implements AlumnoService
     }
 
     @Override
-    public void save(Alumno alumno)
+    public boolean save(Alumno alumno)
     {
-        alumnoDao.save( alumno );
+        return alumnoDao.save( alumno ) != null;
     }
 
     @Override
-    public void deleteById(Long id)
+    public boolean deleteById(Long id)
     {
-        alumnoDao.deleteById( id );
+        return alumnoDao.deleteById( id );
     }
 
     @Override
-    public void update(Alumno alumno)
+    public boolean update(Alumno alumno)
     {
-        alumnoDao.update( alumno );
+        return alumnoDao.update( alumno ) != null;
     }
 }

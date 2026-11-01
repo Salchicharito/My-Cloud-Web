@@ -54,30 +54,41 @@ public class ProfesorMateriaDaoImpl implements ProfesorMateriaDao
         catch (Exception e)
         {
             e.printStackTrace();
-            transaction.rollback( );
+            if( transaction != null && transaction.isActive( ) )
+            {
+                transaction.rollback( );
+            }
+            session.clear( );
             return null;
         }
     }
 
     @Override
-    public void deleteById(Long id)
+    public boolean deleteById(Long id)
     {
         Transaction transaction = null;
-        ProfesorMateria profesorMateria = null;
         try
         {
-            profesorMateria = findById( id );
-            if( profesorMateria != null )
+            ProfesorMateria profesorMateria = findById( id );
+            if( profesorMateria == null )
             {
-                transaction = session.beginTransaction();
-                session.delete( profesorMateria );
-                transaction.commit( );
+                return false;
             }
+            transaction = session.beginTransaction();
+            session.delete( profesorMateria );
+            transaction.commit( );
+            return true;
         }
         catch (Exception e)
         {
+            // Falla si otro registro todavía lo referencia (llave foránea)
             e.printStackTrace();
-            transaction.rollback( );
+            if( transaction != null && transaction.isActive( ) )
+            {
+                transaction.rollback( );
+            }
+            session.clear( );
+            return false;
         }
     }
 
@@ -96,7 +107,11 @@ public class ProfesorMateriaDaoImpl implements ProfesorMateriaDao
         catch (Exception e)
         {
             e.printStackTrace();
-            transaction.rollback( );
+            if( transaction != null && transaction.isActive( ) )
+            {
+                transaction.rollback( );
+            }
+            session.clear( );
             return null;
         }
     }

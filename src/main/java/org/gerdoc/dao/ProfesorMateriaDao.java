@@ -9,6 +9,6 @@ public interface ProfesorMateriaDao
     List<ProfesorMateria> findAll( );
     ProfesorMateria findById(Long id);
     ProfesorMateria save(ProfesorMateria profesorMateria);
-    void deleteById(Long id);
+    boolean deleteById(Long id);
     ProfesorMateria update(ProfesorMateria profesorMateria);
 }

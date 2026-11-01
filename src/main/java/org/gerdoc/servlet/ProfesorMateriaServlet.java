@@ -34,8 +34,8 @@ public class ProfesorMateriaServlet extends HttpServlet
         if ("delete".equals(accion))
         {
             Long id = Long.parseLong( req.getParameter("id" ) );
-            profesorMateriaService.deleteById( id );
-            resp.sendRedirect("ProfesorMaterias.jsp" );
+            boolean borrado = profesorMateriaService.deleteById( id );
+            resp.sendRedirect( borrado ? "ProfesorMaterias.jsp" : "ProfesorMaterias.jsp?error=delete" );
             return;
         }
         Long profesorId = Long.parseLong( req.getParameter("profesorId" ) );
@@ -48,15 +48,16 @@ public class ProfesorMateriaServlet extends HttpServlet
                 .materia(materia)
                 .profesor(profesor)
                 .build();
-        if( "update".equals(accion) )
+        boolean guardado;
+        if( "update".equals( accion ) )
         {
             profesorMateria.setId( id );
-            profesorMateriaService.update( profesorMateria );
+            guardado = profesorMateriaService.update( profesorMateria );
         }
         else
         {
-            profesorMateriaService.save( profesorMateria );
+            guardado = profesorMateriaService.save( profesorMateria );
         }
-        resp.sendRedirect("ProfesorMaterias.jsp");
+        resp.sendRedirect( guardado ? "ProfesorMaterias.jsp" : "ProfesorMaterias.jsp?error=save" );
     }
 }

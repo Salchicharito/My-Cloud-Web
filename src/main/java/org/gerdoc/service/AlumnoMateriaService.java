@@ -8,7 +8,7 @@ public interface AlumnoMateriaService
 {
     List<AlumnoMateria> findAll( );
     AlumnoMateria findById( Long id );
-    void save( AlumnoMateria alumnoMateria );
-    void deleteById( Long id );
-    void update( AlumnoMateria alumnoMateria );
+    boolean save( AlumnoMateria alumnoMateria );
+    boolean deleteById( Long id );
+    boolean update( AlumnoMateria alumnoMateria );
 }

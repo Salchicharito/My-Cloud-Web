@@ -14,6 +14,7 @@
 <body>
 <div class="container">
     <h1>Alumnos</h1>
+    <%@ include file="Mensajes.jspf" %>
     <%
         AlumnoService alumnoService = new AlumnoServiceImpl( );
         List<Alumno> alumnos = alumnoService.findAll( );
@@ -109,7 +110,7 @@
                         Cerrar
                     </button>
 
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" id="btnGuardar">
                         Guardar alumno
                     </button>
                 </div>

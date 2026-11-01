@@ -26,8 +26,8 @@ public class MateriaServlet extends HttpServlet
         if ("delete".equals(accion))
         {
             Long id = Long.parseLong( req.getParameter("id" ) );
-            materiaService.deleteById( id );
-            resp.sendRedirect("Materias.jsp");
+            boolean borrado = materiaService.deleteById( id );
+            resp.sendRedirect( borrado ? "Materias.jsp" : "Materias.jsp?error=delete" );
             return;
         }
         String nombre = req.getParameter("nombre" );
@@ -37,15 +37,16 @@ public class MateriaServlet extends HttpServlet
                 .nombre( nombre )
                 .creditos( creditos )
                 .build();
+        boolean guardado;
         if( "update".equals( accion ) )
         {
             materia.setId( id );
-            materiaService.update( materia );
+            guardado = materiaService.update( materia );
         }
         else
         {
-            materiaService.save( materia );
+            guardado = materiaService.save( materia );
         }
-        resp.sendRedirect("Materias.jsp");
+        resp.sendRedirect( guardado ? "Materias.jsp" : "Materias.jsp?error=save" );
     }
 }

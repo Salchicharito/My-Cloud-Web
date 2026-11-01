@@ -20,6 +20,7 @@
 <body>
 <div class="container">
     <h1>ProfesorMaterias</h1>
+    <%@ include file="Mensajes.jspf" %>
     <%
         ProfesorMateriaService profesorMateriaService = new ProfesorMateriaServiceImpl( );
         List<ProfesorMateria> profesorMaterias = profesorMateriaService.findAll( );
@@ -136,7 +137,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Cerrar
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" id="btnGuardar">
                         Guardar Profesor Materia
                     </button>
                 </div>

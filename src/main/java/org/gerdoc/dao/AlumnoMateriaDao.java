@@ -9,6 +9,6 @@ public interface AlumnoMateriaDao
     List<AlumnoMateria> findAll( );
     AlumnoMateria findById(Long id);
     AlumnoMateria save(AlumnoMateria alumnoMateria);
-    void deleteById(Long id);
+    boolean deleteById(Long id);
     AlumnoMateria update(AlumnoMateria alumnoMateria);
 }

@@ -29,20 +29,20 @@ public class ProfesorMateriaServiceImpl implements ProfesorMateriaService
     }
 
     @Override
-    public void save(ProfesorMateria profesorMateria)
+    public boolean save(ProfesorMateria profesorMateria)
     {
-        profesorMateriaDao.save( profesorMateria );
+        return profesorMateriaDao.save( profesorMateria ) != null;
     }
 
     @Override
-    public void deleteById(Long id)
+    public boolean deleteById(Long id)
     {
-        profesorMateriaDao.deleteById( id );
+        return profesorMateriaDao.deleteById( id );
     }
 
     @Override
-    public void update(ProfesorMateria profesorMateria)
+    public boolean update(ProfesorMateria profesorMateria)
     {
-        profesorMateriaDao.update( profesorMateria );
+        return profesorMateriaDao.update( profesorMateria ) != null;
     }
 }

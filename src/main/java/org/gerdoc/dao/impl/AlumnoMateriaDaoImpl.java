@@ -54,30 +54,41 @@ public class AlumnoMateriaDaoImpl implements AlumnoMateriaDao
         catch (Exception e)
         {
             e.printStackTrace();
-            transaction.rollback( );
+            if( transaction != null && transaction.isActive( ) )
+            {
+                transaction.rollback( );
+            }
+            session.clear( );
             return null;
         }
     }
 
     @Override
-    public void deleteById(Long id)
+    public boolean deleteById(Long id)
     {
         Transaction transaction = null;
-        AlumnoMateria alumnoMateria = null;
         try
         {
-            alumnoMateria = findById( id );
-            if( alumnoMateria != null )
+            AlumnoMateria alumnoMateria = findById( id );
+            if( alumnoMateria == null )
             {
-                transaction = session.beginTransaction();
-                session.delete( alumnoMateria );
-                transaction.commit( );
+                return false;
             }
+            transaction = session.beginTransaction();
+            session.delete( alumnoMateria );
+            transaction.commit( );
+            return true;
         }
         catch (Exception e)
         {
+            // Falla si otro registro todavía lo referencia (llave foránea)
             e.printStackTrace();
-            transaction.rollback( );
+            if( transaction != null && transaction.isActive( ) )
+            {
+                transaction.rollback( );
+            }
+            session.clear( );
+            return false;
         }
     }
 
@@ -96,7 +107,11 @@ public class AlumnoMateriaDaoImpl implements AlumnoMateriaDao
         catch (Exception e)
         {
             e.printStackTrace();
-            transaction.rollback( );
+            if( transaction != null && transaction.isActive( ) )
+            {
+                transaction.rollback( );
+            }
+            session.clear( );
             return null;
         }
     }

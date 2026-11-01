@@ -8,7 +8,7 @@ public interface ProfesorService
 {
     List<Profesor> findAll( );
     Profesor findById( Long id );
-    void save( Profesor profesor );
-    void deleteById( Long id );
-    void update( Profesor profesor );
+    boolean save( Profesor profesor );
+    boolean deleteById( Long id );
+    boolean update( Profesor profesor );
 }
